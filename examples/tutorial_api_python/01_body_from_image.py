@@ -27,8 +27,8 @@ try:
     opWrapper.start()
 
     # get all files in /DigitalICU/record_rgb
-    input_folder = '~/DigitalICU/record_rgb'
-    output_folder = './output'
+    input_folder = './input-folder'
+    output_folder = './output-folder'
     os.makedirs(output_folder, exist_ok=True)
 
     files = [f for f in os.listdir(input_folder) if f.endswith(".png")]
