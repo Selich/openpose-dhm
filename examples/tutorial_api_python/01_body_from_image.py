@@ -12,7 +12,8 @@ try:
         from openpose import pyopenpose as op
     except ImportError as e:
         print(
-            'Error: OpenPose library could not be found. Did you enable `BUILD_PYTHON` in CMake and have this Python script in the right folder?')
+            'Error: OpenPose library could not be found. Did you enable `BUILD_PYTHON` in CMake and have this Python '
+            'script in the right folder?')
         raise e
 
     parser = argparse.ArgumentParser()
@@ -26,7 +27,7 @@ try:
     opWrapper.start()
 
     # get all files in /DigitalICU/record_rgb
-    input_folder = '/DigitalICU/record_rgb'
+    input_folder = '~/DigitalICU/record_rgb'
     output_folder = './output'
     os.makedirs(output_folder, exist_ok=True)
 
