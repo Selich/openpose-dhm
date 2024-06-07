@@ -19,7 +19,7 @@ try:
     parser = argparse.ArgumentParser()
 
     params = dict()
-    params["model_folder"] = "../../../models/"
+    params["model_folder"] = "./models/"
 
     # Starting OpenPose
     opWrapper = op.WrapperPython()
