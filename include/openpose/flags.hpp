@@ -36,7 +36,7 @@ DEFINE_string(camera_resolution,        "-1x-1",        "Set the camera resoluti
 DEFINE_string(video,                    "",             "Use a video file instead of the camera. Use `examples/media/video.avi` for our default"
                                                         " example video.");
 DEFINE_string(image_dir,                "",             "Process a directory of images. Use `examples/media/` for our default example folder with 20"
-                                                        " images. Read all standard formats (jpg, png, bmp, etc.).");
+DEFINE_string(image_single,             "",             "Process a single image. Read all standard formats (jpg, png, bmp, etc.).");
 DEFINE_bool(flir_camera,                false,          "Whether to use FLIR (Point-Grey) stereo camera.");
 DEFINE_int32(flir_camera_index,         -1,             "Select -1 (default) to run on all detected flir cameras at once. Otherwise, select the flir"
                                                         " camera index to run, where 0 corresponds to the detected flir camera with the lowest"

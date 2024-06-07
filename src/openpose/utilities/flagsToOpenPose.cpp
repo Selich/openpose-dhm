@@ -162,29 +162,29 @@ namespace op
     }
 
     ProducerType flagsToProducerType(
-        const String& imageDirectory, const String& videoPath, const String& ipCameraPath,
+        const String& imagePath, const String& videoPath, const String& ipCameraPath,
         const int webcamIndex, const bool flirCamera)
     {
         try
         {
             opLog("", Priority::Low, __LINE__, __FUNCTION__, __FILE__);
-            const std::string& imageDirectoryStd = imageDirectory.getStdString();
+            const std::string& imagePathStd = imagePath.getStdString();
             const std::string& videoPathStd = videoPath.getStdString();
             const std::string& ipCameraPathStd = ipCameraPath.getStdString();
             // Avoid duplicates (e.g., selecting at the time camera & video)
-            if (int(!imageDirectoryStd.empty()) + int(!videoPathStd.empty()) + int(webcamIndex > 0)
+            if (int(!imagePathStd.empty()) + int(!videoPathStd.empty()) + int(webcamIndex > 0)
                 + int(flirCamera) + int(!ipCameraPathStd.empty()) > 1)
                 error("Selected simultaneously"
-                      " image directory (seletected: " + (imageDirectoryStd.empty() ? "no" : imageDirectoryStd) + "),"
-                      " video (seletected: " + (videoPathStd.empty() ? "no" : videoPathStd) + "),"
+                      " image path (selected: " + (imagePathStd.empty() ? "no" : imagePathStd) + "),"
+                      " video (selected: " + (videoPathStd.empty() ? "no" : videoPathStd) + "),"
                       " camera (selected: " + (webcamIndex > 0 ? std::to_string(webcamIndex) : "no") + "),"
                       " flirCamera (selected: " + (flirCamera ? "yes" : "no") + ","
                       " and/or IP camera (selected: " + (ipCameraPathStd.empty() ? "no" : ipCameraPathStd) + ")."
                       " Please, select only one.", __LINE__, __FUNCTION__, __FILE__);
 
             // Get desired ProducerType
-            if (!imageDirectoryStd.empty())
-                return ProducerType::ImageDirectory;
+            if (!imagePathStd.empty())
+                return ProducerType::ImageSingle;
             else if (!videoPathStd.empty())
                 return ProducerType::Video;
             else if (!ipCameraPathStd.empty())
@@ -202,17 +202,17 @@ namespace op
     }
 
     std::pair<ProducerType, String> flagsToProducer(
-        const String& imageDirectory, const String& videoPath, const String& ipCameraPath,
+        const String& imagePath, const String& videoPath, const String& ipCameraPath,
         const int webcamIndex, const bool flirCamera, const int flirCameraIndex)
     {
         try
         {
             opLog("", Priority::Low, __LINE__, __FUNCTION__, __FILE__);
             const auto type = flagsToProducerType(
-                imageDirectory, videoPath, ipCameraPath, webcamIndex, flirCamera);
+                imagePath, videoPath, ipCameraPath, webcamIndex, flirCamera);
 
-            if (type == ProducerType::ImageDirectory)
-                return std::make_pair(ProducerType::ImageDirectory, imageDirectory);
+            if (type == ProducerType::ImageSingle)
+                return std::make_pair(ProducerType::ImageSingle, imagePath);
             else if (type == ProducerType::Video)
                 return std::make_pair(ProducerType::Video, videoPath);
             else if (type == ProducerType::IPCamera)
